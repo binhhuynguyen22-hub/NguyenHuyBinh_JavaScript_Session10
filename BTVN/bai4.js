@@ -8,30 +8,42 @@ const players = [
   { name: "Benzema", years: 19, salary: 75 },
 ];
 
-function analyzeSalary(minYears, teamPlayers) {
-  const filteredPlayers = teamPlayers.filter(
-    (player) => player.years >= minYears,
-  );
-  if (filteredPlayers.length === 0) {
-    return null;
-  }
-  const totalSalary = filteredPlayers.reduce(
-    (sum, player) => sum + player.salary,
-    0,
-  );
+function analyzeSalary(year, teamPlayers) {
 
-  const highestPaid = filteredPlayers.reduce((max, player) =>
-    player.salary > max.salary ? player : max,
-  );
+  const filteredPlayers = teamPlayers.filter(function(player) {
+    return player.years >= year;
+  });
 
-  const lowestPaid = filteredPlayers.reduce((min, player) =>
-    player.salary < min.salary ? player : min,
-  );
+  const totalSalary = filteredPlayers.reduce(function(sum, player) {
+    return sum + player.salary;
+  }, 0);
+
+  const highestPaid = filteredPlayers.reduce(function(max, player) {
+    if (player.salary > max.salary) {
+      return player;
+    } else {
+      return max;
+    }
+  });
+
+  const lowestPaid = filteredPlayers.reduce(function(min, player) {
+    if (player.salary < min.salary) {
+      return player;
+    } else {
+      return min;
+    }
+  });
 
   return {
     totalSalary: totalSalary,
-    highestPaid: { name: highestPaid.name, salary: highestPaid.salary },
-    lowestPaid: { name: lowestPaid.name, salary: lowestPaid.salary },
+    highestPaid: {
+      name: highestPaid.name,
+      salary: highestPaid.salary
+    },
+    lowestPaid: {
+      name: lowestPaid.name,
+      salary: lowestPaid.salary
+    }
   };
 }
 
