@@ -1,7 +1,7 @@
 const player = {
     name: "De Bruyne",
     position: "Midfielder",
-    goals: 8,
+    goals: 20,
     assists: 25,
     matchesPlayed: 35
 };
